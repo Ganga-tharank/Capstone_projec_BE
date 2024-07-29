@@ -51,10 +51,10 @@ app.get('/', (req, res) =>{
 // app.post('/api/auth/login',(req, res)=>{
 //   res.send({message: 'Login Sucessful'})
 // })
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "../frontend/build")));
-  app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")));
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.resolve(__dirname, "../frontend/build")));
+//   app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")));
+// }
 
 
 
