@@ -17,23 +17,23 @@ app.use(bodyParser.json());
 
 console.log('SECRET_KEY:', process.env.SECRET_KEY);
 
-// const mongoUrl = ('mongodb://localhost:27017');
+
+
+// const mongoUrl = process.env.MONGODB_URI;
 // mongoose.connect(mongoUrl, err => {
 //   if (err) throw err;
 //   console.log("Mongodb connected...");
 // });
-// const mongoose = require('mongoose');
-
-async function connectToDatabase() {
-  try {
-    await mongoose.connect('mongodb://127.0.0.1:27017');
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
     console.log('Connected to MongoDB');
-  } catch (err) {
-    console.error('Failed to connect to MongoDB', err);
-  }
-}
-
-connectToDatabase();
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 
 
 app.use("/api/auth", authRoutes);
@@ -44,9 +44,11 @@ app.get('/', (req, res) =>{
     res.send('Welcome To The Task Manager API')
 })
  
-// app.post('/api/auth/login',(req, res)=>{
-//   res.send({message: 'Login Sucessful'})
-// })
+// app.post('/auth/signup', (req, res) => {
+//   // Handle the signup request here
+//   console.log('Signup request received');
+//   res.send('Signup successful');
+// });
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 //   app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")));
